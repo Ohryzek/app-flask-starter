@@ -7,7 +7,11 @@ app = Flask(__name__)
 def index():
 	#aktuální datum
 	date = datetime.now().strftime("%d. %m. %Y")
-
+	password = request.args.get("password")
+	if password == "tajneheslo":
+		return "Tajné heslo je správné!"
+	elif password:
+		return "Tajné heslo je nesprávné!"
 	name=request.args.get("name")
 	surname=request.args.get("surname")
 
