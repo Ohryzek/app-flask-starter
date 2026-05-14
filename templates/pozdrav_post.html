@@ -25,13 +25,10 @@
     {% endif %}
 
     Řekni mi své jméno a zadej heslo pro odhalení tajemství!
-    <form method="POST">
+	<form action="/pozdrav-post" method="POST">
         <input type="text" name="name" placeholder="Zadej své jméno">
         <input type="text" name="surname" placeholder="Zadej své příjmení">
-        
-      
         <input type="password" name="password" placeholder="Zadej tajné heslo">
-        
         <button type="submit">Odeslat</button>
     </form>
 
