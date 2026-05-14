@@ -26,7 +26,7 @@ def index():
         # Původní kód pro GET požadavky (např. heslo v URL)
         password = request.args.get("password")
         if password == "tajneheslo":
-            return "Tajné heslo je správné!"
+            return "Tajné heslo je správné a tajnou informací je, že Gymzr je opravdu lepší než BIGY!"
         elif password:
             return "Tajné heslo je nesprávné!"
         name = request.args.get("name")
