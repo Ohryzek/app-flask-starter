@@ -11,7 +11,7 @@ def index():
     # aktuální datum
     date = datetime.now().strftime("%d. %m. %Y")
     
-..
+	
     
     return render_template("page.html", date=date)      
 
