@@ -3,37 +3,17 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"]) # Přidán POST, aby fungoval formulář
+
+SPRAVNE_HESLO = "tajneheslo"
+
+@app.route("/", methods=["GET", "POST"])
 def index():
     # aktuální datum
     date = datetime.now().strftime("%d. %m. %Y")
-    error = None
-    name = None
-    surname = None
-
-    if request.method == "POST":
-        name = request.form.get("name")
-        surname = request.form.get("surname")
-
-        # VALIDACE VSTUPU
-        if not name or name.strip() == "":
-            error = "Chyba: Jméno nesmí být prázdné."
-            name = None # Vymažeme jméno, aby se nevypsal pozdrav
-        elif len(name) > 50:
-            error = "Chyba: Jméno nesmí být delší než 50 znaků."
-            name = None
-    else:
-        # Původní kód pro GET požadavky (např. heslo v URL)
-        password = request.args.get("password")
-        if password == "tajneheslo":
-            return "Tajné heslo je správné a tajnou informací je, že Gymzr je opravdu lepší než BIGY!"
-        elif password:
-            return "Tajné heslo je nesprávné!"
-        name = request.args.get("name")
-        surname = request.args.get("surname")
-
-    # Přidáno předání proměnné 'error' do šablony
-    return render_template("page.html", date=date, name=name, surname=surname, error=error)      
+    
+..
+    
+    return render_template("page.html", date=date)      
 
 @app.route("/pozdrav-post", methods=["POST", "GET"])
 def pozdrav_post():
@@ -42,23 +22,28 @@ def pozdrav_post():
     error = None
     name = None
     surname = None
+    secret_info = None  
 
     if request.method == "POST":
         name = request.form.get("name")
         surname = request.form.get("surname")
+        password = request.form.get("password") 
 
-        # VALIDACE VSTUPU
-        # 1. Ošetři prázdné jméno
+      
+        if password == SPRAVNE_HESLO:
+            secret_info = "Tohle je přísně tajná informace! Obědy na Gymzr jsou super."
+        elif password:
+            error = "Chyba: Zadané heslo je nesprávné!"
+
+  
         if not name or name.strip() == "":
             error = "Chyba: Zadej prosím své jméno, pole nesmí zůstat prázdné."
             name = None
-        # 2. Omez délku jména na 50 znaků
         elif len(name) > 50:
             error = "Chyba: Zadané jméno je příliš dlouhé (maximálně 50 znaků)."
             name = None
 
-    # Přidáno předání proměnné 'error' do šablony
-    return render_template("pozdrav-post.html", date=date, name=name, surname=surname, error=error)
+    return render_template("pozdrav-post.html", date=date, name=name, surname=surname, error=error, secret_info=secret_info)
 
 if __name__=="__main__":
     app.run(debug=True)
