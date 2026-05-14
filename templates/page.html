@@ -8,31 +8,20 @@
     Ahoj, dnes je {{ date }}.
     <hr>
     
-
+    <!-- Tady zobrazíme srozumitelnou chybovou zprávu z Pythonu -->
     {% if error %}
         <p style="color: red;"><strong>{{ error }}</strong></p>
-    {% endif %}
-
-
-    {% if secret_info %}
-        <p style="color: green; border: 2px solid green; padding: 10px;">
-            <strong>Tajná sekce:</strong> {{ secret_info }}
-        </p>
     {% endif %}
 
     {% if name %}
         <strong>{{ name }} {{ surname }}, rád tě vidím!</strong><hr>
     {% endif %}
 
-    Řekni mi své jméno a zadej heslo pro odhalení tajemství!
+    Řekni mi své jméno a já tě pozdravím!
     <form method="POST">
         <input type="text" name="name" placeholder="Zadej své jméno">
         <input type="text" name="surname" placeholder="Zadej své příjmení">
-        
-      
-        <input type="password" name="password" placeholder="Zadej tajné heslo">
-        
-        <button type="submit">Odeslat</button>
+        <button type="submit">Pozdrav mě!</button>
     </form>
 
 </body>
