@@ -21,8 +21,15 @@
     <form method="POST">
         <input type="text" name="name" placeholder="Zadej své jméno">
         <input type="text" name="surname" placeholder="Zadej své příjmení">
+        <input type="password" name="password" placeholder="Zadej heslo (pro tajnou informaci)">
         <button type="submit">Pozdrav mě!</button>
     </form>
+
+    <!-- Tajná informace -->
+    {% if secret %}
+        <hr>
+        <p style="color: green;"><strong>🎉 Tajná informace:</strong> {{ secret }}</p>
+    {% endif %}
 
 </body>
 </html>

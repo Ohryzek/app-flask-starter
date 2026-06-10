@@ -42,10 +42,15 @@ def pozdrav_post():
     error = None
     name = None
     surname = None
+    secret = None
+    
+    # Správné heslo
+    SPRAVNE_HESLO = "python123"
 
     if request.method == "POST":
         name = request.form.get("name")
         surname = request.form.get("surname")
+        password = request.form.get("password", "")
 
         # VALIDACE VSTUPU
         # 1. Ošetři prázdné jméno
@@ -56,9 +61,14 @@ def pozdrav_post():
         elif len(name) > 50:
             error = "Chyba: Zadané jméno je příliš dlouhé (maximálně 50 znaků)."
             name = None
+        # 3. Kontrola hesla (pokud je vyplněno)
+        elif password and password != SPRAVNE_HESLO:
+            error = "Chyba: Zadané heslo je nesprávné."
+        elif password == SPRAVNE_HESLO:
+            secret = "Gratulujeme! Jsi vítěz! 🏆 Tajné číslo: 42"
 
-    # Přidáno předání proměnné 'error' do šablony
-    return render_template("pozdrav-post.html", date=date, name=name, surname=surname, error=error)
+    # Přidáno předání proměnné 'secret' do šablony
+    return render_template("pozdrav_post.html", date=date, name=name, surname=surname, error=error, secret=secret)
 
 if __name__=="__main__":
     app.run(debug=True)
