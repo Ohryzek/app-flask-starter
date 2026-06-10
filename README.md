@@ -15,3 +15,7 @@ Aplikace běží na <http://127.0.0.1:5000>.
 - Build command `pip install -r requirements.txt`
 - Start command `gunicorn app:app`
 *Pozn.: soubor requirements.txt slouží pro spuštění na službě Render*
+
+Největší problémy a co se povedlo:
+
+Největší problém mi dělala šablona pro user. Že mě to nepustilo dále a musel jsem to opravovat. Až poté jsem s Vojtou na to přišel. Ale nejjednouší byli první úkoly.
